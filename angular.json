@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "hackathon2020"
+    }
+  },
+  "defaultProject": "hackathon2020",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,0 +1,108 @@
+$steps: 1,2,3,4,5;
+
+.rm-results {
+  position: relative;
+  background-color: #e5e5e5;
+  min-height: 100vh;
+  &__content {
+    padding: 40px 8px 90px 8px;
+  }
+  &__progress {
+    width: 348px;
+    height: 4px;
+    border-radius: 2px;
+    background-color: #ebebeb;
+    margin-bottom: 16px;
+    @each $size in $steps {
+      &--#{$size} {
+        span {
+          display: block;
+          background-color: #e60000;
+          height: 100%;
+          width: calc(#{$size}*20%);
+        }
+      }
+    }
+
+  }
+
+  &__card {
+    padding: 16px 8px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+  }
+  &__btn {
+    padding: 8px 16px;
+    display: inline-block;
+    width: 100%;
+    background-color: #e60000;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  &__footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background-color: white;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  &__btn-selection {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    &:after {
+      position: absolute;
+      content: 'icono';
+      display: inline-block;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &--descartar {
+      background-color: #3A3A3A;
+
+    }
+    &--like {
+      background-color: #009900;
+
+    }
+  }
+  &__backdrop-header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    span {
+      display: inline-block;
+      width: 200px;
+      font-size: 18px;
+    }
+  }
+
+  &__list-discards {
+    width: 100%;
+    button {
+      width: 100%;
+      height: 36px;
+      padding: 4px 16px;
+      border-radius: 18px;
+      background-color: #ffffff;
+      color: #e60000;
+      margin-bottom: 12px;
+    }
+  }
+}
+

@@ -19,6 +19,11 @@
     "@angular/platform-browser": "~9.1.9",
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
+    "@vodafone-es/reboot-dsl-mva10-angular": "^2.10.1",
+    "@vodafone-es/reboot-dsl-mva10-shared": "^2.10.2",
+    "lottie-web": "^5.7.4",
+    "ng2-nouislider": "^1.8.2",
+    "nouislider": "^14.6.3",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

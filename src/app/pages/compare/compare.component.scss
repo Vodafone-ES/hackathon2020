@@ -1,0 +1,61 @@
+.rm-compare {
+  background-color: #e5e5e5;
+  min-height: 100vh;
+
+  &__content {
+    padding: 40px 0 40px 12px;
+  }
+  &__tobi {
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    padding-left: 48px;
+    margin-bottom: 16px;
+
+    .tobi {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    > article {
+      max-width: 254px;
+      border-radius: 12px;
+      background-color: white;
+      padding: 4px 16px;
+      color: #333333;
+      margin-bottom: 12px;
+
+      > p {
+        font-size: 18px;
+        margin-bottom: 0;
+        font-weight: normal;
+      }
+    }
+
+    > span {
+      padding-left: 16px;
+      display: inline-block;
+      font-size: 14px;
+      color: #666666;
+    }
+  }
+
+  &__message {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    margin-bottom: 28px;
+
+    > p {
+      width: 254px;
+      border-radius: 12px;
+      background-color: white;
+      padding: 4px 16px;
+      color: #e60000;
+      font-size: 18px;
+      text-align: center;
+    }
+  }
+}

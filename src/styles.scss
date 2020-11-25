@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+$font-local-path: 'assets/fonts/';
+@import 'node_modules/@vodafone-es/reboot-dsl-mva10-shared/src/styles/main-no-components';
+
+
+// Common styles
+
+@import 'styles/common-styles.scss';
+@import 'styles/utilities.scss';

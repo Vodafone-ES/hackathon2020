@@ -1,0 +1,104 @@
+<section class="rm-chat">
+  <app-header></app-header>
+  <div class="rm-chat__dialog">
+    <div class="rm-chat__user">
+      <article>
+        <p>Recomiendame un teléfono móvil</p>
+      </article>
+      <span>09:57
+      <mva10-c-icon
+        [size]=16
+        [title]="'check'"
+        [iconId]="'icon-tick-outline'">
+        </mva10-c-icon>
+      <mva10-c-icon
+        [size]=16
+        [title]="'check'"
+        [iconId]="'icon-tick-outline'">
+        </mva10-c-icon></span>
+    </div>
+
+    <div class="rm-chat__tobi">
+      <span class="tobi"></span>
+      <article>
+        <p>
+          ¡Claro! Te voy a hacer 3 preguntas para conocerte mejor.
+        </p>
+      </article>
+      <span>09:52</span>
+    </div>
+
+    <div class="rm-chat__tobi">
+      <span class="tobi"></span>
+      <article>
+        <p>
+          ¿De qué tamaño te gustan?
+        </p>
+      </article>
+    </div>
+
+    <div class="rm-chat__message">
+      <p>!Terminado¡</p>
+    </div>
+
+    <div class="rm-chat__loading">
+      <div class="rm-chat__loading-ballon">
+        <div class="rm-loading"><div></div><div></div><div></div><div></div></div>
+      </div>
+    </div>
+
+    <div class="rm-chat__selection">
+      <ul>
+        <li>
+          <button class="rm-chat__selection-btn active"
+                  type="button"
+                  [ngClass]="{'active': price === 0}"
+                  (click)="handleSelector(0)" > No mucho </button>
+        </li>
+        <li>
+          <button class="rm-chat__selection-btn"
+                  type="button"
+                  [ngClass]="{'active': price === 1}"
+                  (click)="handleSelector(1)" > Tengo algo ahorrado </button>
+        </li>
+        <li>
+          <button class="rm-chat__selection-btn"
+                  type="button"
+                  [ngClass]="{'active': price === 2}"
+                  (click)="handleSelector(2)" > No voy a escatimar </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="rm-chat__selection rm-chat__selection--multi">
+      <ul>
+        <li>
+          <button class="rm-chat__selection-btn"
+                  type="button"
+                  [ngClass]="{'active': isActive(0)}"
+                  (click)="handleMultiSelector(0)" > Ver videos </button>
+        </li>
+        <li>
+          <button class="rm-chat__selection-btn"
+                  type="button"
+                  [ngClass]="{'active': isActive(1)}"
+                  (click)="handleMultiSelector(1)" > Escuchar música </button>
+        </li>
+        <li>
+          <button class="rm-chat__selection-btn"
+                  type="button"
+                  [ngClass]="{'active': isActive(2)}"
+                  (click)="handleMultiSelector(2)" >Jugar a videojuegos </button>
+        </li>
+        <li>
+          <button class="rm-chat__selection-btn"
+                  type="button"
+                  [ngClass]="{'active': isActive(3)}"
+                  (click)="handleMultiSelector(3)" >Trabajar</button>
+        </li>
+      </ul>
+    </div>
+
+
+  </div>
+</section>
