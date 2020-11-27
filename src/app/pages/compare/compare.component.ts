@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ResultsService } from '../../services/results.service';
 
 @Component({
   selector: 'app-compare',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompareComponent implements OnInit {
 
-  constructor() { }
+  terminalsCompare = [];
 
-  ngOnInit(): void {
+  constructor(
+    private resultSrv: ResultsService
+  ) {
   }
 
+  ngOnInit(): void {
+    this.terminalsCompare = this.resultSrv.getCompareStatus();
+    console.log(this.terminalsCompare);
+  }
+
+
+  urlImage(url){
+    return `https://www.vodafone.es${url}`;
+  }
 }

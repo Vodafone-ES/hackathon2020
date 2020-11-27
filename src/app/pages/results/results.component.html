@@ -2,46 +2,63 @@
   <app-header></app-header>
 
   <div class="rm-results__content">
-    <div class="rm-results__progress rm-results__progress--2">
+    <div class="rm-results__progress rm-results__progress--{{positionStepsInit + 1}}">
       <span></span>
     </div>
 
-    <article class="rm-results__card">
-      <h2>Marca + Nombre del teléfono + Color + Capacidad </h2>
-      <div>
-        <picture>
-          <img src="" alt="">
+    <article class="rm-results__card" *ngIf="terminals" >
+      <div class="rm-results__affinity">
+        <span class="rm-results__tags">{{matchRound(terminals[positionStepsInit].match)}}% afinidad</span>
+      </div>
+      <h2>{{terminals[positionStepsInit].marca}} {{terminals[positionStepsInit].nombre}} {{terminals[positionStepsInit].memoriaInterna}} GB</h2>
+      <div class="rm-results__distribution rm-u-mb8">
+        <picture class="rm-results__picture">
+          <img [src]="urlImage(terminals[positionStepsInit].imagenFrontal)" alt="Imagen ">
         </picture>
-        <div>
-          <h3>XX€/mes</h3>
-          <p>XX mes + X€ pago inicial</p>
+        <div class="rm-results__info">
+          <h3>{{terminals[positionStepsInit].pagoAlContadoConIva}} €</h3>
+          <p class="rm-u-mb8"> Con la tarifa Ilimitada Super</p>
 
-          <p>cons la tarifa móvil</p>
+         <!-- <p>cons la tarifa móvil</p>
           <h3>Ilimitada Super</h3>
-          <p>X€/ mes</p>
+          <p>X€/ mes</p>-->
+          <div class="rm-results__distribution rm-results__distribution--between">
+            <a href="#" class="rm-results__link"> ¿Qué incluye? </a>
+            <a href="#" class="rm-results__link"> ¿Sólo quieres móvil? </a>
+          </div>
         </div>
       </div>
-      <div>
-        <ul>
-          <li> icon + mediano</li>
-          <li> icon + buena</li>
-          <li> icon + muy buena</li>
+      <div class="rm-u-mb8 rm-results__box">
+        <ul class="rm-results__distribution rm-results__distribution--between">
+          <li><mva10-c-icon [iconId]="'icon-mobile'" size="24"></mva10-c-icon>
+          {{isBuenaPantalla(terminals[positionStepsInit].tamanoPantalla)}}</li>
+          <li><mva10-c-icon [iconId]="'icon-camera'" size="24"></mva10-c-icon>
+            {{isBuenaCamera(terminals[positionStepsInit].camaraTrasera)}}</li>
+          <li><mva10-c-icon [iconId]="'icon-dashboard'" size="24"></mva10-c-icon>
+            {{isAltaCapacidad(terminals[positionStepsInit].memoriaInterna)}}</li>
         </ul>
       </div>
-      <div>
+      <div class="rm-results__description">
         Pequeño snippet con dos líneas del texto descriptivo de este móvil con … saber más
       </div>
       <button type="button" class="rm-results__btn"> ¡Lo quiero!</button>
     </article>
   </div>
 
+
+
   <footer class="rm-results__footer">
     <button type="button"
             class="rm-results__btn-selection rm-results__btn-selection--descartar"
             (click)="showBackdrop()"
-    ></button>
+    >
+      <img src="assets/aspa.png" alt="">
+    </button>
     <button type="button"
-            class="rm-results__btn-selection rm-results__btn-selection--like"></button>
+            class="rm-results__btn-selection rm-results__btn-selection--like"
+            (click)="iLike(terminals[positionStepsInit])" >
+      <img src="assets/corazon.png" alt="">
+    </button>
   </footer>
 </section>
 

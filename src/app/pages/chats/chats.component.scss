@@ -11,6 +11,7 @@
     flex-flow: column nowrap;
     align-items: flex-end;
     margin-bottom: 16px;
+    padding-right: 16px;
 
     > article {
       max-width: 264px;
@@ -83,7 +84,7 @@
     justify-content: center;
     margin-bottom: 28px;
 
-    > p {
+    > p, a, button {
       width: 254px;
       border-radius: 12px;
       background-color: white;
@@ -112,6 +113,7 @@
   }
 
   &__selection {
+    margin-bottom: 64px;
     ul {
       list-style: none;
       padding: 0;

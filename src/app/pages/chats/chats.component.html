@@ -1,15 +1,18 @@
 <section class="rm-chat">
   <app-header></app-header>
   <div class="rm-chat__dialog">
-    <div class="rm-chat__user">
+    <div class="rm-chat__message" *ngIf="!initGreetings" (click)="initDialog()">
+      <button type="button">! Comencemos ¡</button>
+    </div>
+    <div *ngIf="initGreetings" class="rm-chat__user">
       <article>
-        <p>Recomiendame un teléfono móvil</p>
+        <p>Tobi, recomiendame un teléfono móvil</p>
       </article>
-      <span>09:57
-      <mva10-c-icon
-        [size]=16
-        [title]="'check'"
-        [iconId]="'icon-tick-outline'">
+      <span>{{getHoursMinutes()}}
+        <mva10-c-icon
+          [size]=16
+          [title]="'check'"
+          [iconId]="'icon-tick-outline'">
         </mva10-c-icon>
       <mva10-c-icon
         [size]=16
@@ -18,85 +21,185 @@
         </mva10-c-icon></span>
     </div>
 
-    <div class="rm-chat__tobi">
-      <span class="tobi"></span>
-      <article>
-        <p>
-          ¡Claro! Te voy a hacer 3 preguntas para conocerte mejor.
-        </p>
-      </article>
-      <span>09:52</span>
-    </div>
 
-    <div class="rm-chat__tobi">
-      <span class="tobi"></span>
-      <article>
-        <p>
-          ¿De qué tamaño te gustan?
-        </p>
-      </article>
-    </div>
-
-    <div class="rm-chat__message">
-      <p>!Terminado¡</p>
-    </div>
-
-    <div class="rm-chat__loading">
-      <div class="rm-chat__loading-ballon">
-        <div class="rm-loading"><div></div><div></div><div></div><div></div></div>
+    <ng-container *ngFor="let dialog of dialogs">
+      <div class="rm-chat__tobi" *ngIf="dialog?.greetings">
+        <span class="tobi"></span>
+        <article>
+          <p>
+            {{dialog.greetings.text}}
+          </p>
+        </article>
+        <span>{{getHoursMinutes()}}</span>
       </div>
-    </div>
 
-    <div class="rm-chat__selection">
-      <ul>
-        <li>
-          <button class="rm-chat__selection-btn active"
-                  type="button"
-                  [ngClass]="{'active': price === 0}"
-                  (click)="handleSelector(0)" > No mucho </button>
-        </li>
-        <li>
-          <button class="rm-chat__selection-btn"
-                  type="button"
-                  [ngClass]="{'active': price === 1}"
-                  (click)="handleSelector(1)" > Tengo algo ahorrado </button>
-        </li>
-        <li>
-          <button class="rm-chat__selection-btn"
-                  type="button"
-                  [ngClass]="{'active': price === 2}"
-                  (click)="handleSelector(2)" > No voy a escatimar </button>
-        </li>
-      </ul>
-    </div>
+      <ng-container *ngIf="dialog?.display">
+        <div class="rm-chat__tobi">
+          <span class="tobi"></span>
+          <article>
+            <p>
+              {{dialog?.display.questions}}
+            </p>
+          </article>
+          <span>{{getHoursMinutes()}}</span>
+        </div>
 
-    <div class="rm-chat__selection rm-chat__selection--multi">
-      <ul>
-        <li>
-          <button class="rm-chat__selection-btn"
-                  type="button"
-                  [ngClass]="{'active': isActive(0)}"
-                  (click)="handleMultiSelector(0)" > Ver videos </button>
-        </li>
-        <li>
-          <button class="rm-chat__selection-btn"
-                  type="button"
-                  [ngClass]="{'active': isActive(1)}"
-                  (click)="handleMultiSelector(1)" > Escuchar música </button>
-        </li>
-        <li>
-          <button class="rm-chat__selection-btn"
-                  type="button"
-                  [ngClass]="{'active': isActive(2)}"
-                  (click)="handleMultiSelector(2)" >Jugar a videojuegos </button>
-        </li>
-        <li>
-          <button class="rm-chat__selection-btn"
-                  type="button"
-                  [ngClass]="{'active': isActive(3)}"
-                  (click)="handleMultiSelector(3)" >Trabajar</button>
-        </li>
-      </ul>
+        <div class="rm-chat__selection">
+          <ul>
+            <li *ngFor="let answer of dialog?.display.answers">
+              <button class="rm-chat__selection-btn active"
+                      type="button"
+                      [ngClass]="{'active': display === answer.value}"
+                      (click)="handleSelectorDisplay(answer.value)"> {{answer.text}} </button>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="dialog?.price">
+        <div class="rm-chat__tobi">
+          <span class="tobi"></span>
+          <article>
+            <p>
+              {{dialog?.price.questions}}
+            </p>
+          </article>
+          <span>{{getHoursMinutes()}}</span>
+        </div>
+
+        <div class="rm-chat__selection">
+          <ul>
+            <li *ngFor="let answer of dialog?.price.answers">
+              <button class="rm-chat__selection-btn active"
+                      type="button"
+                      [ngClass]="{'active': price === answer.value}"
+                      (click)="handleSelectorPrice(answer.value)"> {{answer.text}} </button>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="dialog?.use">
+        <div class="rm-chat__tobi">
+          <span class="tobi"></span>
+          <article>
+            <p>
+              {{dialog?.use.questions}}
+            </p>
+          </article>
+          <span>{{getHoursMinutes()}}</span>
+        </div>
+
+        <div class="rm-chat__selection">
+          <ul>
+            <li *ngFor="let answer of dialog?.use.answers">
+              <button class="rm-chat__selection-btn active"
+                      type="button"
+                      [ngClass]="{'active': use === answer.value}"
+                      (click)="handleSelectorUse(answer.value)"> {{answer.text}} </button>
+            </li>
+          </ul>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="dialog?.apps">
+        <div class="rm-chat__tobi">
+          <span class="tobi"></span>
+          <article>
+            <p>
+              {{dialog?.apps.questions}}
+            </p>
+          </article>
+          <span>{{getHoursMinutes()}}</span>
+        </div>
+        <div class="rm-chat__selection rm-chat__selection--multi">
+          <ul>
+            <li *ngFor="let answer of dialog.apps.answers">
+              <button class="rm-chat__selection-btn"
+                      type="button"
+                      [ngClass]="{'active': isActiveApps(answer.value)}"
+                      (click)="handleMultiSelectorApps(answer.value)"> {{answer.text}}</button>
+            </li>
+
+          </ul>
+          <div class="rm-chat__message" *ngIf="isBtnAppsVisible" (click)="handleSaveMultiSelectorApps()">
+            <button type="button">Guardar Apss</button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="dialog?.game">
+        <div class="rm-chat__tobi">
+          <span class="tobi"></span>
+          <article>
+            <p>
+              {{dialog?.game.questions}}
+            </p>
+          </article>
+          <span>{{getHoursMinutes()}}</span>
+        </div>
+        <div class="rm-chat__selection rm-chat__selection--multi">
+          <ul>
+            <li *ngFor="let answer of dialog.game.answers">
+              <button class="rm-chat__selection-btn"
+                      type="button"
+                      [ngClass]="{'active': isActiveGames(answer.value)}"
+                      (click)="handleMultiSelectorGame(answer.value)"> {{answer.text}}</button>
+            </li>
+
+          </ul>
+          <div class="rm-chat__message" *ngIf="isBtnGameVisible" (click)="handleSaveMultiSelectorGame()">
+            <button type="button">Guardar Games</button>
+          </div>
+        </div>
+
+      </ng-container>
+      <ng-container *ngIf="dialog?.content">
+        <div class="rm-chat__tobi">
+          <span class="tobi"></span>
+          <article>
+            <p>
+              {{dialog?.content.questions}}
+            </p>
+          </article>
+          <span>{{getHoursMinutes()}}</span>
+        </div>
+        <div class="rm-chat__selection">
+          <ul>
+            <li *ngFor="let answer of dialog?.content.answers">
+              <button class="rm-chat__selection-btn active"
+                      type="button"
+                      [ngClass]="{'active': content === answer.value}"
+                      (click)="handleSelectorContent(answer.value)"> {{answer.text}} </button>
+            </li>
+          </ul>
+        </div>
+
+      </ng-container>
+      <ng-container *ngIf="dialog?.final">
+        <div class="rm-chat__message">
+          <button type="button">¡ Terminado !</button>
+        </div>
+
+        <div class="rm-chat__tobi">
+          <span class="tobi"></span>
+          <article>
+            <p>
+              {{dialog?.final.question}}
+            </p>
+          </article>
+          <span>{{getHoursMinutes()}}</span>
+        </div>
+        <div class="rm-chat__message">
+          <button type="button" (click)="sendStatus()">Quiero ver mis recomendaciones</button>
+        </div>
+      </ng-container>
+    </ng-container>
+    <div *ngIf="isLoadingShow" class="rm-chat__loading">
+      <div class="rm-chat__loading-ballon">
+        <div class="rm-loading">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
     </div>
 
 

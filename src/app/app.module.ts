@@ -9,6 +9,7 @@ import { ChatsComponent } from './pages/chats/chats.component';
 import { ResultsComponent } from './pages/results/results.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CompareComponent } from './pages/compare/compare.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { CompareComponent } from './pages/compare/compare.component';
     BrowserModule,
     AppRoutingModule,
     Mva10DslAngularModule,
+    HttpClientModule
 
   ],
   providers: [],
