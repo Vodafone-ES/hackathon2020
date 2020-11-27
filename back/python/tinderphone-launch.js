@@ -4,7 +4,6 @@ const {exec} = require('child_process');
 
 const fs = require('fs');
 const fileNamePython = path.join(__dirname + '/tinderphone.py');
-const answers = [2, 2, 2, 1, 1, 1, 1, 1, 1];
 
 function getMatchesTerminals( answers ) {
   console.log(typeof answers);
@@ -19,7 +18,8 @@ function getMatchesTerminals( answers ) {
     }
     console.log(`File generate ok!!`);
     // PATH PRO ../dist/hackathon2020/assets/result.json
-    fs.copyFile(path.join(__dirname +'/tusMovilesGracias.json'), '../src/assets/result.json', (err) => {
+    // Path Local ../src/assets/result.json
+    fs.copyFile(path.join(__dirname +'/tusMovilesGracias.json'), '../dist/hackathon2020/assets/result.json', (err) => {
       if (err) {
         console.log("Error Found:", err);
       } else {
